@@ -1,9 +1,4 @@
-from collections import defaultdict, Counter, deque
-import itertools as it
-import random
 import re
-import sys
-import time
 
 def part1(points):
     overlapping = 0

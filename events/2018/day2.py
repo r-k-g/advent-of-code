@@ -1,8 +1,4 @@
-from collections import defaultdict, Counter, deque
-import itertools as it
-import random
-import sys
-import time
+from collections import Counter
 
 def part1(inp):
     twos = 0

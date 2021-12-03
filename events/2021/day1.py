@@ -1,13 +1,3 @@
-import random, os, sys, re, statistics
-from collections import deque, OrderedDict, Counter, defaultdict
-from itertools import chain, combinations, permutations, product
-from functools import lru_cache, reduce
-from copy import deepcopy
-from day2 import SAMPLE_INP
-
-def constant_factory(value):
-    return lambda: value
-
 from lib import *
 problem = aoc.Problem("2021/01: Sonar Sweep")
 problem.preprocessor = ppr.lsi
