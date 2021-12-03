@@ -69,7 +69,7 @@ class Problem:
 
         return register
 
-    def solve(self):
+    def solve(self, sample_inp=None, *sample_ans):
         """ solve()
 
         Run the solver functions and pretty-print the output.
@@ -77,6 +77,74 @@ class Problem:
 
         print("--- Day {}: {} ---".format(self.day, self.name))
 
+        inp_s = self._get_input()
+
+        if inp_s is None: # no input
+            return
+
+        self.check_sample(sample_inp, sample_ans)
+
+        # Run each solver.
+        for part, fn in self.fns.items():
+            # Apply the preprocessor.
+            inp = self.preprocessor(inp_s)
+
+            # Run the solver on the input and time the runtime.
+            start = time.perf_counter()
+            out = fn(inp)
+            stop = time.perf_counter()
+
+            # Compute runtime and appropriate time unit.
+            delta, unit = (stop - start), 0
+            while delta < 1 and unit <= 3:
+                delta, unit = 1000 * delta, unit + 1
+            delta, unit = round(delta, 5), ["s", "ms", "us", "ns"][unit]
+
+            # Print answers
+            if (part in ["both"]) and (type(out) is tuple) and (len(out) >= 2):
+                print("Part 1: {}".format(out[0]))
+                print("Part 2: {} (total runtime: {}{})".format(
+                    out[1], delta, unit
+                ))
+            else:
+                print("Part {}: {} (runtime: {}{})".format(
+                    part, out, delta, unit
+                ))
+    
+    def check_sample(self, sample_inp, sample_ans):
+        """Check the sample input against expected output."""
+
+        if sample_inp:
+            if len(sample_ans) == 1 and type(sample_ans[0]) in (tuple, list):
+                sample_ans = sample_ans[0]
+
+            c = 0
+            for part, fn in self.fns.items():
+                s_inp = self.preprocessor(sample_inp)
+
+                out = fn(s_inp)
+                
+                if not sample_ans:
+                    print(f"Sample output: {out}")
+
+                elif part in ["both"] and isinstance(out, tuple):
+                    print(self._check_ans(out[0], sample_ans[0]))
+                    print(self._check_ans(out[1], sample_ans[1]))
+                
+                else:
+                    print(self._check_ans(out, sample_ans[c]))
+                
+                c += 1
+    
+    def _check_ans(self, out, expected):
+        """Check if output matches expected value and return string explanation."""
+
+        if out == expected:
+            return f"\x1b[30;42m PASSED \x1b[0m Correct sample output ({out!r} == {expected!r})!"
+        else:
+            return f"\x1b[30;41m FAILED \x1b[0m Sample output {out!r} does not match expected {expected!r}."
+
+    def _get_input(self):
         # Setup the path to the local cache.
         fp = pathlib.Path(
             "~/.cache/adventofcode.com/{:04}/{:02}/input".format(
@@ -94,7 +162,7 @@ class Problem:
                 inp_l.append(i)
             inp_s = "\n".join(inp_l)
 
-            if not fp.exists():
+            if not fp.exists() or "--B" in sys.argv:
                 # Write the response to the cache.
                 fp.parent.mkdir(parents=True, exist_ok=True)
                 with open(fp, "w") as fh:
@@ -166,30 +234,6 @@ class Problem:
             # Read input from cache.
             with open(fp, "r") as fh:
                 inp_s = fh.read()
+        
+        return inp_s
 
-        # Run each solver.
-        for part, fn in self.fns.items():
-            # Apply the preprocessor.
-            inp = self.preprocessor(inp_s)
-
-            # Run the solver on the input and time the runtime.
-            start = time.perf_counter()
-            out = fn(inp)
-            stop = time.perf_counter()
-
-            # Compute runtime and appropriate time unit.
-            delta, unit = (stop - start), 0
-            while delta < 1 and unit <= 3:
-                delta, unit = 1000 * delta, unit + 1
-            delta, unit = round(delta, 5), ["s", "ms", "us", "ns"][unit]
-
-            # Print answers
-            if (part in ["both"]) and (type(out) is tuple) and (len(out) >= 2):
-                print("Part 1: {}".format(out[0]))
-                print("Part 2: {} (total runtime: {}{})".format(
-                    out[1], delta, unit
-                ))
-            else:
-                print("Part {}: {} (runtime: {}{})".format(
-                    part, out, delta, unit
-                ))

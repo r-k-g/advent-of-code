@@ -23,9 +23,6 @@ def part1(inp):
         x += d[move][0] * n
         y += d[move][1] * n
 
-        if y < 0:
-            y = 0
-
     return x * y
 
 @problem.solver(part=2)
@@ -46,10 +43,16 @@ def part2(inp):
             x += n
             y += aim * n
 
-        if y < 0:
-            y = 0
-
     return x * y
 
+SAMPLE_INP =\
+"""forward 5
+down 5
+forward 8
+up 3
+down 8
+forward 2
+"""
+
 if __name__ == "__main__":
-    problem.solve()
+    problem.solve(SAMPLE_INP, 150, 900)

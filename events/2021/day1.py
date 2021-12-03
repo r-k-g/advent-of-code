@@ -3,6 +3,7 @@ from collections import deque, OrderedDict, Counter, defaultdict
 from itertools import chain, combinations, permutations, product
 from functools import lru_cache, reduce
 from copy import deepcopy
+from day2 import SAMPLE_INP
 
 def constant_factory(value):
     return lambda: value
@@ -30,5 +31,18 @@ def solve(inp):
 
     return (p1, p2)
 
+SAMPLE_INP =\
+"""199
+200
+208
+210
+200
+207
+240
+269
+260
+263
+"""
+
 if __name__ == "__main__":
-    problem.solve()
+    problem.solve(SAMPLE_INP, 7, 5)
