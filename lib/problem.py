@@ -114,7 +114,7 @@ class Problem:
     def check_sample(self, sample_inp, sample_ans):
         """Check the sample input against expected output."""
 
-        if sample_inp:
+        if sample_inp is not None and sample_inp.strip():
             if len(sample_ans) == 1 and type(sample_ans[0]) in (tuple, list):
                 sample_ans = sample_ans[0]
 
