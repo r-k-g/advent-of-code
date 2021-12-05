@@ -30,7 +30,7 @@ def llsv(s):
 def grid(s):
     return [list(l) for l in s.strip().split("\n")]
 
-# empty line separated groups
+# Empty line separated groups
 def llsg(s):
     return [[l for l in g.split("\n")] for g in s.strip().split("\n\n")]
 

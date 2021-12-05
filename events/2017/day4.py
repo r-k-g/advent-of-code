@@ -1,8 +1,5 @@
 from collections import Counter
 
-def constant_factory(value):
-    return lambda: value
-
 from lib import *
 problem = aoc.Problem("2017/04: High-Entropy Passphrases")
 problem.preprocessor = ppr.lsv

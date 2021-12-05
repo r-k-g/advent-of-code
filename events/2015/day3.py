@@ -1,8 +1,5 @@
 import random, os, sys, re, statistics
-from collections import deque, OrderedDict, Counter, defaultdict
-from itertools import chain, combinations, permutations, product
-from functools import lru_cache, reduce
-from copy import deepcopy
+from collections import defaultdict
 
 def constant_factory(value):
     return lambda: value
