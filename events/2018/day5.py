@@ -23,7 +23,6 @@ def final_length(polymer):
                 polymer = polymer.replace(r, "")
     return len(polymer)
 
-
 SAMPLE_INP =\
 """dabAcCaCBAcCcaDA
 """
