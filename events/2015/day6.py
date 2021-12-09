@@ -58,4 +58,4 @@ def part2(inp):
     return p2
 
 if __name__ == "__main__":
-    problem.solve("toggle 0,0 through 999,0", 1000, 0)
+    problem.solve("toggle 0,0 through 999,0", 1000, 2000)

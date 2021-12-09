@@ -31,7 +31,6 @@ def part2(commands):
         else:
             commands[position] += 1
 
-
         position += jump
 
         steps += 1
