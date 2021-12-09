@@ -1,8 +1,6 @@
-import random, os, sys, re, statistics
-from collections import deque, OrderedDict, Counter, defaultdict
-from itertools import chain, combinations, permutations, product
-from functools import lru_cache, reduce
-from copy import deepcopy
+import re
+from collections import defaultdict
+from itertools import permutations
 
 def constant_factory(value):
     return lambda: value
@@ -13,10 +11,6 @@ problem.preprocessor = ppr.lsv
 
 @problem.solver()
 def solve(inp):
-    debug = len(inp) < 10
-
-    p1, p2 = 0, 0
-
     distances = defaultdict(dict)
 
     for v in inp:
