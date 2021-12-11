@@ -1,5 +1,5 @@
 def I(s):
-    return s
+    return s.strip()
 def identity(s):
     return s
 
