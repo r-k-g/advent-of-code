@@ -36,7 +36,7 @@ def coords_around(x, y, direct=True, diagonal=True,
                 a_y < len(limits_grid),
             ])
         else:
-            validator = lambda _, _1: True
+            validator = lambda *_: True
     
     deltas = (
         [(0, 1), (0, -1), (1, 0), (-1, 0)] * direct +
@@ -46,3 +46,22 @@ def coords_around(x, y, direct=True, diagonal=True,
         adj_x, adj_y = x + dx, y + dy
         if validator(adj_x, adj_y):
             yield (adj_x, adj_y)
+
+def rotate_matrix(matrix, ccw=False):
+    """Rotate a matrix by 90 degrees."""
+    if ccw:
+        return [list(i)[::-1] for i in zip(*matrix[::-1])][::-1]
+    return [list(i) for i in zip(*matrix[::-1])]
+
+def get_col(grid, col):
+    """Get specified column from a grid."""
+    return [row[col] for row in grid]
+
+def get_row(grid, row, copy=True):
+    """Get specified row from a grid, copy by default."""
+    if copy:
+        return grid[row].copy()
+    return grid[row]
+
+def constant_factory(value):
+    return lambda: value
