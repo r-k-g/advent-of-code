@@ -71,8 +71,8 @@ def checkrow(board, row):
 def checkcol(board, col):
     return all([i[col] for i in board])
 
-SAMPLE_INP =\
-"""7,4,9,5,11,17,23,2,0,14,21,24,10,16,13,6,15,25,12,22,18,20,8,19,3,26,1
+SAMPLE_INP = ("""
+7,4,9,5,11,17,23,2,0,14,21,24,10,16,13,6,15,25,12,22,18,20,8,19,3,26,1
 
 22 13 17 11  0
  8  2 23  4 24
@@ -91,7 +91,7 @@ SAMPLE_INP =\
 18  8 23 26 20
 22 11 13  6  5
  2  0 12  3  7
-"""
+""")
 
 if __name__ == "__main__":
     problem.solve(SAMPLE_INP, 4512, 1924)

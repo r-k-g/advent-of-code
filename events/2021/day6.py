@@ -29,9 +29,9 @@ def solve(fishes):
 
     return (count1, count2)
 
-SAMPLE_INP =\
-"""3,4,3,1,2
-"""
+SAMPLE_INP = ("""
+3,4,3,1,2
+""")
 
 if __name__ == "__main__":
     problem.solve(SAMPLE_INP, 5934, 26984457539)

@@ -18,9 +18,9 @@ def solve(inp):
     
     return (min(positions[::2]), min(positions[1::2]))
 
-SAMPLE_INP =\
-"""16,1,2,0,4,2,7,1,2,14
-"""
+SAMPLE_INP = ("""
+16,1,2,0,4,2,7,1,2,14
+""")
 
 if __name__ == "__main__":
     problem.solve(SAMPLE_INP, 37, 168)

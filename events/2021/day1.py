@@ -21,8 +21,8 @@ def solve(inp):
 
     return (p1, p2)
 
-SAMPLE_INP =\
-"""199
+SAMPLE_INP = ("""
+199
 200
 208
 210
@@ -32,7 +32,7 @@ SAMPLE_INP =\
 269
 260
 263
-"""
+""")
 
 if __name__ == "__main__":
     problem.solve(SAMPLE_INP, 7, 5)

@@ -68,8 +68,8 @@ def neighbours(x, y, grid):
         if delta != (0, 0):
             yield adj_x, adj_y
 
-SAMPLE_INP =\
-"""5483143223
+SAMPLE_INP = ("""
+5483143223
 2745854711
 5264556173
 6141336146
@@ -79,7 +79,7 @@ SAMPLE_INP =\
 6882881134
 4846848554
 5283751526
-"""
+""")
 
 if __name__ == "__main__":
     problem.solve(SAMPLE_INP, 1656, 195)

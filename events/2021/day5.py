@@ -40,8 +40,8 @@ def solve(inp):
 
     return (p1, p2)
 
-SAMPLE_INP =\
-"""0,9 -> 5,9
+SAMPLE_INP = ("""
+0,9 -> 5,9
 8,0 -> 0,8
 9,4 -> 3,4
 2,2 -> 2,1
@@ -51,7 +51,7 @@ SAMPLE_INP =\
 3,4 -> 1,4
 0,0 -> 8,8
 5,5 -> 8,2
-"""
+""")
 
 if __name__ == "__main__":
     problem.solve(SAMPLE_INP, 5, 12)

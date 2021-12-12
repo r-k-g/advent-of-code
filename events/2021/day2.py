@@ -36,14 +36,14 @@ def part2(inp):
 
     return x * y
 
-SAMPLE_INP =\
-"""forward 5
+SAMPLE_INP = ("""
+forward 5
 down 5
 forward 8
 up 3
 down 8
 forward 2
-"""
+""")
 
 if __name__ == "__main__":
     problem.solve(SAMPLE_INP, 150, 900)

@@ -62,8 +62,8 @@ def part2(inp):
 
     return int(oxy[0], 2) * int(co2[0], 2)
 
-SAMPLE_INP =\
-"""00100
+SAMPLE_INP = ("""
+00100
 11110
 10110
 10111
@@ -74,7 +74,8 @@ SAMPLE_INP =\
 10000
 11001
 00010
-01010"""
+01010
+""")
 
 if __name__ == "__main__":
     problem.solve(SAMPLE_INP, 198, 230)

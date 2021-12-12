@@ -61,13 +61,13 @@ def get_adjacent(x, y, grid, coords=False):
     return points
 
 
-SAMPLE_INP =\
-"""2199943210
+SAMPLE_INP = ("""
+2199943210
 3987894921
 9856789892
 8767896789
 9899965678
-"""
+""")
 
 if __name__ == "__main__":
     problem.solve(SAMPLE_INP, 15, 1134)
