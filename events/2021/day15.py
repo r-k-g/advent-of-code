@@ -1,4 +1,5 @@
 import math
+from copy import deepcopy
 
 from lib import *
 problem = aoc.Problem("2021/15: Chiton")
@@ -25,11 +26,19 @@ def lowest_risk(grid, expand):
             row.append(val)
         big_grid.append(row)
 
-    for y in range(len(big_grid)):
-        for x in range(len(big_grid[y])):
-            dist_graph[(x, y)] = path_risk_to((0, 0), (x, y), big_grid, set(), 0)
-    
-    return dist_graph[(len(big_grid[-1]) - 1, len(big_grid) - 1)] - big_grid[0][0]
+
+    diff = True
+    while diff:
+        dist_graph[(0, 0)] = 0
+        lastg = deepcopy(dist_graph)
+        for y in range(len(big_grid)):
+            for x in range(len(big_grid[y])):
+                if (x, y) == (0, 0):
+                    continue
+                dist_graph[(x, y)] = path_risk_to((0, 0), (x, y), big_grid, set(), 0)
+        diff = lastg != dist_graph
+
+    return dist_graph[(len(big_grid[-1]) - 1, len(big_grid) - 1)]
 
 all_lengths = set()
 def path_risk_to(start, goal, grid, path, risk):
@@ -47,11 +56,16 @@ def path_risk_to(start, goal, grid, path, risk):
         return risk
 
 SAMPLE_INP = ("""
-11119
-99919
-91119
-91999
-91111
+1163751742
+1381373672
+2136511328
+3694931569
+7463417111
+1319128137
+1359912421
+3125421639
+1293138521
+2311944581
 """)
 
 if __name__ == "__main__":
