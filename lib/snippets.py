@@ -1,3 +1,7 @@
+import heapq
+from collections import defaultdict
+from copy import deepcopy
+
 UP = NORTH = (0, 1)
 DOWN = SOUTH = (0, -1)
 RIGHT = EAST = (1, 0)
@@ -63,5 +67,49 @@ def get_row(grid, row, copy=True):
         return grid[row].copy()
     return grid[row]
 
-def constant_factory(value):
-    return lambda: value
+def flip_horizontal(grid):
+    """Return a grid flipped horizontally."""
+    new = []
+    for row in grid:
+        new.append(row[::-1])
+    return new
+
+def flip_vertical(grid):
+    """Return a copy of a grid flipped verically."""
+    return deepcopy(grid[::-1])
+
+class WGraph:
+    def __init__(self, nodes=None, edges=None):
+        self.edges = defaultdict(dict) if edges is None else edges
+        self.nodes = set(self.edges.keys()) if nodes is None else nodes
+    
+    def add_edge(self, node1, node2, weight, two_way=True):
+        self.edges[node1][node2] = weight
+        if two_way:
+            self.edges[node2][node1] = weight
+        
+        self.nodes.add(node1)
+        self.nodes.add(node2)
+    
+    def distances_from(self, start):
+        distances = defaultdict(lambda: float("inf"))
+        distances[start] = 0
+        queue = [(0, start)]
+        visited = set([start])
+
+        while queue:
+            cdist, current = heapq.heappop(queue)
+
+            for node, dist in self.edges[current].items():
+                distances[node] = min(
+                    distances[node], 
+                    cdist + dist
+                )
+
+                if node not in visited:
+                    heapq.heappush(queue, (distances[node], node))
+                    visited.add(node)
+        
+        return distances
+
+

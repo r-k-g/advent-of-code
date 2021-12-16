@@ -12,6 +12,9 @@ problem.preprocessor = ppr.lsv
 def solve(inp):
     p1, p2 = 0, 0
 
+    print("LEN", len(inp))
+    debug = len(inp) == 10
+
     for v in inp:
         print(v)
 
