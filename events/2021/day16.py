@@ -3,9 +3,10 @@ from collections import deque, OrderedDict, Counter, defaultdict
 from itertools import chain, combinations, permutations, product
 from functools import lru_cache, reduce
 from copy import deepcopy
+import operator
 
 from lib import *
-problem = aoc.Problem("2021/16: ???")
+problem = aoc.Problem("2021/16: Packet Decoder")
 problem.preprocessor = ppr.I
 
 HEX_TO_BIN = {
@@ -36,6 +37,19 @@ class Packet:
     
     def sum_versions(self):
         return self.version + sum(sp.sum_versions() for sp in self.subpackets)
+
+    def get_value(self):
+        funcs = {
+            0: lambda spv: sum(spv),
+            1: lambda spv: reduce(operator.mul, spv),
+            2: lambda spv: min(spv),
+            3: lambda spv: max(spv),
+            4: lambda _  : self.literal,
+            5: lambda spv: int(spv[0] > spv[1]),
+            6: lambda spv: int(spv[0] < spv[1]),
+            7: lambda spv: int(spv[0] == spv[1])
+        }
+        return funcs[self.tid]([sp.get_value() for sp in self.subpackets])
     
     def __repr__(self):
         return f"Packet({self.version=} {self.tid=} {self.literal=} {self.subpackets=})"
@@ -43,29 +57,10 @@ class Packet:
 @problem.solver()
 def solve(inp):
     global data
-    p1, p2 = 0, 0
 
     data = "".join(HEX_TO_BIN[i] for i in inp)
-
-    print(parse())
-
-    return (p1, p2)
-
-def consume(n):
-    global data
-
-    val = ""
-
-    if n > 1:
-        val = data[:n]
-        data = data[n:]
-    else:
-        while True:
-            chunk = consume(5)
-            val += chunk[1:]
-            if chunk[0] == "0":
-                break
-    return val
+    outer = parse()
+    return (outer.sum_versions(), outer.get_value())
 
 def parse():
     version = int(consume(3), 2)
@@ -74,19 +69,37 @@ def parse():
     subpackets = []
 
     if tid == 4:
-        literal = int(consume(-1), 2)
+        literal = get_literal()
     else:
         ltid = int(consume(1), 2)
         if ltid == 0:
             length = int(consume(15), 2)
+            start_size = len(data)
+            while start_size - len(data) != length:
+                subpackets.append(parse())
         elif ltid == 1:
             count = int(consume(11), 2)        
+            for _ in range(count):
+                subpackets.append(parse())
 
     return Packet(version, tid, literal, subpackets)
 
-SAMPLE_INP = ("""
-D2FE28
-""")
+def consume(n):
+    global data
+
+    val = data[:n]
+    data = data[n:]
+    return val
+
+def get_literal():
+    chunks = []
+    while True:
+        chunk = consume(5)
+        chunks.append(chunk[1:])
+        if chunk[0] == "0":
+            break
+    return int("".join(chunks), 2)
+
 
 if __name__ == "__main__":
-    problem.solve(SAMPLE_INP, 0, 0)
+    problem.solve()
