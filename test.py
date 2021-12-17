@@ -1,13 +1,13 @@
 import sys
 
-import runner
+import aoc
 
-args = runner.handle_args()
+helper = aoc.Helper("2021/32", "A Puzzle")
 
 SAMPLE = "1"
-runner.check_sample(args.test, SAMPLE)
+helper.check_sample(SAMPLE)
 
-IN = runner.get_inp(args) or sys.stdin.read()
+IN = helper.get_inp() or sys.stdin.read()
 
 n = 1 * int(IN.strip())
 print("Part 1:", n)
