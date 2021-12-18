@@ -1,13 +1,19 @@
 import argparse
+import os
+import pathlib
 import re
+import requests
 import subprocess
 import sys
 
 class Helper:
     def __init__(self, date, name):
         self.filepath = sys.argv[0]
-        self.date = date
+
+        m = re.search("(\d{2}|\d{4})\s+[/:]\s+(\d{1,2})", date)
+        self.year, self.day = [int(g) for g in m.groups()]
         self.name = name
+
         self.handle_args()
 
     def handle_args(self):
@@ -21,7 +27,7 @@ class Helper:
             return
         
         result = subprocess.run(
-            ["python3", self.filepath, "--testing"],
+            ["python", self.filepath, "--testing"],
             input=sample.encode(),
             capture_output=True
         )
@@ -44,7 +50,33 @@ class Helper:
         
         print()
 
-    def get_inp(self):
+    def get_input(self):
+        _token = os.getenv("AOC_TOKEN")
+        if _token is None:
+            token_fp = None
+            paths = [
+                ".AOC_TOKEN",
+                ".AOC_SESSION",
+                "~/.AOC_TOKEN",
+                "~/.AOC_SESSION",
+            ]
+            for p in paths:
+                path = pathlib.Path(p).expanduser()
+                if path.is_file():
+                    token_fp = path
+                    break
+            if token_fp is not None:
+                pass
+            else:
+                pass
+        
+        r = requests.get(
+            f"https://adventofcode.com/{self.year}/day/{self.day}/input",
+            headers={
+                "User-Agent": "https://github.com/r-k-g/advent-of-code",
+                "Cookie": f"session={_token}"
+            }
+        )
         if self.args.testing:
             return False
         return "5"

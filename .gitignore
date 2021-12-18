@@ -2,7 +2,9 @@
 /**/.venv
 
 /**/input
-/**/input.txt
+/**/input.*
 /**/*.in
 
 /**/.aoc_token
+
+/**/*.pyc
