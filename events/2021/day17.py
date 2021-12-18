@@ -1,5 +1,3 @@
-# run with pypy if you value your time
-
 import re
 
 from lib import *
@@ -45,7 +43,8 @@ def solve(inp):
     for xvel in range(0, x2 + 1):
         for yvel in range(-abs(y1) - 1, abs(y1) + 1):
             p = Probe(xvel=xvel, yvel=yvel)
-            for i in range(1000):
+
+            while p.x <= x2 and p.y >= y1:
                 if p.in_area(x1, y1, x2, y2):
                     heights.add(p.max_h)
                     successful += 1
