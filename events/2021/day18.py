@@ -78,15 +78,7 @@ def splittable(l):
     return None
 
 def add_snailfish(l1, l2):
-    l = []
-    l.append("[")
-    for i in l1:
-        l.append(i)
-    l.append(",")
-    for i in l2:
-        l.append(i)
-    l.append("]")
-    return l
+    return ["[", *l1, ",", *l2, "]"]
 
 def str_to_snailfish(s):
     return [int(i) if i.isnumeric() else i for i in s]
@@ -98,6 +90,7 @@ def get_magnitude(l):
     if isinstance(l, int):
         return l
 
+    # convert into actual nested lists the first time
     if any([isinstance(i, str) for i in l]):
         l = eval(snail_to_str(l))
 
