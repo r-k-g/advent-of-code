@@ -1,8 +1,5 @@
-import random, os, sys, re, statistics
-from collections import deque, OrderedDict, Counter, defaultdict
-from itertools import chain, combinations, permutations, product
-from functools import lru_cache, reduce
-from copy import deepcopy
+from itertools import permutations, product
+import re
 
 from lib import *
 problem = aoc.Problem("2021/19: Beacon Scanner")
@@ -12,57 +9,97 @@ class Scanner:
     def __init__(self, number, beacons: set):
         axes = list(product([1, -1], repeat=3))
         indices = list(permutations([0,1,2]))
-        self.orientations = product(axes, indices)
+        self.orientations = list(product(axes, indices))
 
         self.number = number
         self.relative_beacons = beacons
-        self.beacons = deepcopy(self.relative_beacons)
+        self.beacons = self.relative_beacons.copy()
+        self.final = set()
+
+        self.x = 0
+        self.y = 0
+        self.z = 0
     
     def beacons_from_starting(self, x, y, z):
-        self.reset_beacons()
-        self.beacons = [[xr + x, yr + y, zr + z] for xr, yr, zr in self.beacons]
+        self.beacons = set((xr + x, yr + y, zr + z) for xr, yr, zr in self.beacons)
 
     def reset_beacons(self):
-        self.beacons = deepcopy(self.relative_beacons)
+        self.beacons = self.relative_beacons.copy()
 
     def all_orientations(self):
         for axes, indices in self.orientations:
-            new_beacons = []
+            new_beacons = set()
             for x, y, z in self.beacons:
                 point = [x * axes[0], y * axes[1], z * axes[2]]
-                new_beacons.append([point[i] for i in indices])
+                new_beacons.add(tuple(point[i] for i in indices))
             self.beacons = new_beacons
             yield self.beacons
 
     def __repr__(self):
         return f"Scanner({self.number=}, {len(self.beacons)=})"
+    
+    def pprint(self):
+        print(f"Scanner({self.number=}, self.beacons={{")
+        for b in self.beacons:
+            print(f"\t{b},")
+        print("})")
 
-def common_points(scanner1, scanner2):
-    set(scanner1.beacons) & set(scanner2.beacons)
+def common_points(points1, points2):
+    return points1 & points2
 
 @problem.solver()
 def solve(inp):
-    p1, p2 = 0, 0
-
-    debug = len(inp) == 5
-
     scanners = []
+    fixed = []
 
     for scanner in inp:
         number, *beacons = scanner
         number = int(re.match("--- scanner (\d+) ---", number).groups()[0])
         
-        points = []
+        points = set()
         for beacon in beacons:
             x, y, z = map(int, beacon.split(","))
-            points.append([x, y, z])
+            points.add((x, y, z))
         
         scanners.append(Scanner(number, points))
     
-    for s1, s2 in permutations(scanners, r=2):
-        pass
-    
-    return (p1, p2)
+    scanners[0].final = scanners[0].relative_beacons
+    fixed.append(scanners.pop(0))
+    b_map = fixed[0].beacons.copy()
+
+    while scanners:
+        found = False
+        for sc in scanners:
+            for beacons in sc.all_orientations():
+                for beacon, final in product(beacons, b_map):
+                    xdiff = final[0] - beacon[0]
+                    ydiff = final[1] - beacon[1]
+                    zdiff = final[2] - beacon[2]
+                    sc.beacons_from_starting(xdiff, ydiff, zdiff)
+
+                    if len(c := common_points(b_map, sc.beacons)) >= 12:
+                        b_map = b_map | sc.beacons
+                        scanners.remove(sc)
+                        fixed.append(sc)
+                        sc.x = xdiff
+                        sc.y = ydiff
+                        sc.z = zdiff
+                        found = True
+                        break
+                    
+                    # undo move
+                    sc.beacons_from_starting(-xdiff, -ydiff, -zdiff)
+                if found: break
+                sc.reset_beacons()
+            if found: break
+
+    distances = []
+    for s1, s2 in product(fixed, repeat=2):
+        distances.append(
+            abs(s1.x - s2.x) + abs(s1.y - s2.y) + abs(s1.z - s2.z)
+        )
+
+    return (len(b_map), max(distances))
 
 SAMPLE_INP = ("""
 --- scanner 0 ---
@@ -204,6 +241,4 @@ SAMPLE_INP = ("""
 """)
 
 if __name__ == "__main__":
-    problem.solve(SAMPLE_INP, 0, 0)
-
-# 432, 14414
+    problem.solve(SAMPLE_INP, 79, 3621)
