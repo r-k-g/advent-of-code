@@ -14,7 +14,6 @@ class Scanner:
         self.number = number
         self.relative_beacons = beacons
         self.beacons = self.relative_beacons.copy()
-        self.final = set()
 
         self.x = 0
         self.y = 0
@@ -63,7 +62,6 @@ def solve(inp):
         
         scanners.append(Scanner(number, points))
     
-    scanners[0].final = scanners[0].relative_beacons
     fixed.append(scanners.pop(0))
     b_map = fixed[0].beacons.copy()
 
