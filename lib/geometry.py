@@ -1,4 +1,5 @@
 import itertools
+import math
 
 class Point:
     """ Represents a single point, in any dimension. """

@@ -147,11 +147,10 @@ class Problem:
     def _get_input(self):
         # Setup the path to the local cache.
         fp = pathlib.Path(
-            "~/.cache/adventofcode.com/{:04}/{:02}/input".format(
+            "~/.cache/adventofcode/{:04}/{:02}/input".format(
                 self.year, self.day
             )
         ).expanduser()
-
 
         if "--inp" in sys.argv or "--INP" in sys.argv:
             inp_l = []
