@@ -98,10 +98,6 @@ class Helper:
 
         Returns:
             The input string, unprocessed.
-        
-        Raises:
-            FileNotFoundError: Unable to find a session token to make 
-            the request.
         """
 
         remaining = self.check_time()
@@ -119,7 +115,12 @@ class Helper:
         ).expanduser()
 
         if not fp.is_file() or overwrite_cache:
+            print(PREFIX_INFO, "Downloading input from adventofcode.com...\n")
             inp_s = self._request_inp()
+
+            pathlib.Path.mkdir(fp.parent, parents=True, exist_ok=True)
+            with open(fp, "w") as f:
+                f.write(inp_s)
         else:
             with open(fp, "r") as f:
                 inp_s = f.read()
@@ -142,9 +143,10 @@ class Helper:
                 if token_path.is_file():
                     with open(token_path, "r") as f:
                         _token = f.read().strip()
+                    break
             else:
-                msg = PREFIX_ERROR + "Session token not found."
-                raise FileNotFoundError(msg)
+                print(PREFIX_ERROR + "Session token not found.")
+                sys.exit(1)
         
 
         r = requests.get(
