@@ -1,7 +1,7 @@
 from collections import Counter, defaultdict
 
 from lib import *
-problem = aoc.Problem("2021/03: Binary Diagnostic")
+problem = old_aoc.Problem("2021/03: Binary Diagnostic")
 problem.preprocessor = ppr.lsv
 
 def most_common_col(l, col):

@@ -1,7 +1,7 @@
 from collections import Counter
 
 from lib import *
-problem = aoc.Problem("2017/04: High-Entropy Passphrases")
+problem = old_aoc.Problem("2017/04: High-Entropy Passphrases")
 problem.preprocessor = ppr.lsv
 
 @problem.solver()

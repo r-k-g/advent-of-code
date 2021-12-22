@@ -1,5 +1,5 @@
 from lib import *
-problem = aoc.Problem("2021/02: Dive!")
+problem = old_aoc.Problem("2021/02: Dive!")
 problem.preprocessor = ppr.lsv
 
 @problem.solver(part=1)

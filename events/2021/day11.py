@@ -1,7 +1,7 @@
 from itertools import product
 
 from lib import *
-problem = aoc.Problem("2021/11: Dumbo Octopus")
+problem = old_aoc.Problem("2021/11: Dumbo Octopus")
 problem.preprocessor = lambda s: [
     [int(i) for i in l] for l in s.strip().split("\n")
 ]

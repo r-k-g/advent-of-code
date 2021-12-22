@@ -1,5 +1,5 @@
 from lib import *
-problem = aoc.Problem("2017/06: Memory Reallocation")
+problem = old_aoc.Problem("2017/06: Memory Reallocation")
 problem.preprocessor = lambda nums: [
     int(i) for i in nums.strip().split()
 ]

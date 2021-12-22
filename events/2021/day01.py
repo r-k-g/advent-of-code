@@ -1,5 +1,5 @@
 from lib import *
-problem = aoc.Problem("2021/01: Sonar Sweep")
+problem = old_aoc.Problem("2021/01: Sonar Sweep")
 problem.preprocessor = ppr.lsi
 
 @problem.solver()

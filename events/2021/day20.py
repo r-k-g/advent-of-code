@@ -1,5 +1,5 @@
 from lib import *
-problem = aoc.Problem("2021/20: Trench Map")
+problem = old_aoc.Problem("2021/20: Trench Map")
 problem.preprocessor = ppr.llsv
 
 @problem.solver()

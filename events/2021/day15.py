@@ -2,7 +2,7 @@ import math
 from copy import deepcopy
 
 from lib import *
-problem = aoc.Problem("2021/15: Chiton")
+problem = old_aoc.Problem("2021/15: Chiton")
 problem.preprocessor = ppr.igrid
 
 @problem.solver()

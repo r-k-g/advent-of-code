@@ -1,12 +1,8 @@
-import random, os, sys, re, statistics
-from collections import deque, OrderedDict, Counter, defaultdict
-from itertools import chain, combinations, permutations, product
-from functools import lru_cache, reduce
-from copy import deepcopy
+from functools import reduce
 import operator
 
 from lib import *
-problem = aoc.Problem("2021/16: Packet Decoder")
+problem = old_aoc.Problem("2021/16: Packet Decoder")
 problem.preprocessor = ppr.I
 
 HEX_TO_BIN = {

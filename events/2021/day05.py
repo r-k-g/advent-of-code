@@ -2,7 +2,7 @@ import re
 from collections import defaultdict
 
 from lib import *
-problem = aoc.Problem("2021/05: Hydrothermal Venture")
+problem = old_aoc.Problem("2021/05: Hydrothermal Venture")
 problem.preprocessor = ppr.lsv
 
 @problem.solver()

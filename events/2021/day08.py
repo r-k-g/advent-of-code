@@ -1,5 +1,5 @@
 from lib import *
-problem = aoc.Problem("2021/08: Seven Segment Search")
+problem = old_aoc.Problem("2021/08: Seven Segment Search")
 problem.preprocessor = ppr.lsv
 
 @problem.solver()

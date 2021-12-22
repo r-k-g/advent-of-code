@@ -1,7 +1,7 @@
 from collections import defaultdict
 
 from lib import *
-problem = aoc.Problem("2021/12: Passage Pathing")
+problem = old_aoc.Problem("2021/12: Passage Pathing")
 problem.preprocessor = lambda inp: (
     line.split("-") for line in inp.strip().split("\n")
 )

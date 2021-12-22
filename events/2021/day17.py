@@ -1,7 +1,7 @@
 import re
 
 from lib import *
-problem = aoc.Problem("2021/17: Trick Shot")
+problem = old_aoc.Problem("2021/17: Trick Shot")
 problem.preprocessor = ppr.I
 
 class Probe:

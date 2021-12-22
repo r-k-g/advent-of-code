@@ -1,4 +1,4 @@
-import lib.problem as aoc
+import lib.problem as old_aoc
 
 # Import auxillary libraries.
 import lib.preprocessing as ppr

@@ -2,11 +2,8 @@ import re
 from collections import defaultdict
 from itertools import permutations
 
-def constant_factory(value):
-    return lambda: value
-
 from lib import *
-problem = aoc.Problem("2015/09: All in a Single Night")
+problem = old_aoc.Problem("2015/09: All in a Single Night")
 problem.preprocessor = ppr.lsv
 
 @problem.solver()

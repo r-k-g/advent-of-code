@@ -1,5 +1,5 @@
 from lib import *
-problem = aoc.Problem("2017/09: Stream Processing")
+problem = old_aoc.Problem("2017/09: Stream Processing")
 problem.preprocessor = ppr.I
 
 @problem.solver()

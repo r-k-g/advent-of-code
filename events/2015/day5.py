@@ -1,7 +1,7 @@
 import re
 
 from lib import *
-problem = aoc.Problem("2015/05: Doesn't He Have Intern-Elves For This?")
+problem = old_aoc.Problem("2015/05: Doesn't He Have Intern-Elves For This?")
 problem.preprocessor = ppr.lsv
 
 VOWELS = "aeiou"

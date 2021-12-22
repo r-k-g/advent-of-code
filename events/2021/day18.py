@@ -2,7 +2,7 @@ from itertools import permutations
 import math
 
 from lib import *
-problem = aoc.Problem("2021/18: Snailfish")
+problem = old_aoc.Problem("2021/18: Snailfish")
 problem.preprocessor = ppr.lsv
 
 @problem.solver()

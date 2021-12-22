@@ -1,14 +1,7 @@
-import random, os, sys, re, statistics
-from collections import deque, OrderedDict, Counter, defaultdict
-from itertools import chain, combinations, permutations, product
-from functools import lru_cache, reduce
-from copy import deepcopy
-
-def constant_factory(value):
-    return lambda: value
+import re
 
 from lib import *
-problem = aoc.Problem("2015/06: Probably a Fire Hazard")
+problem = old_aoc.Problem("2015/06: Probably a Fire Hazard")
 problem.preprocessor = ppr.lsv
 
 @problem.solver(part=1)

@@ -1,5 +1,5 @@
 from lib import *
-problem = aoc.Problem("2019/03: Crossed Wires")
+problem = old_aoc.Problem("2019/03: Crossed Wires")
 problem.preprocessor = ppr.lsv
 
 @problem.solver()

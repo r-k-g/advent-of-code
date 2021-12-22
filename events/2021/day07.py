@@ -1,5 +1,5 @@
 from lib import *
-problem = aoc.Problem("2021/07: The Treachery of Whales")
+problem = old_aoc.Problem("2021/07: The Treachery of Whales")
 problem.preprocessor = ppr.csi
 
 @problem.solver()

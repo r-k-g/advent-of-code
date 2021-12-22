@@ -1,5 +1,5 @@
 from lib import *
-problem = aoc.Problem("2021/10: Syntax Scoring")
+problem = old_aoc.Problem("2021/10: Syntax Scoring")
 problem.preprocessor = ppr.lsv
 
 CLOSINGS = {"(": ")", "[": "]", "{": "}", "<": ">"}

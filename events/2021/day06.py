@@ -1,7 +1,7 @@
 from collections import Counter
 
 from lib import *
-problem = aoc.Problem("2021/06: Lanternfish")
+problem = old_aoc.Problem("2021/06: Lanternfish")
 problem.preprocessor = ppr.csi
 
 @problem.solver()

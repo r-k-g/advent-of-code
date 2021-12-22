@@ -1,7 +1,7 @@
 from itertools import combinations
 
 from lib import *
-problem = aoc.Problem("2015/02: I Was Told There Would Be No Math")
+problem = old_aoc.Problem("2015/02: I Was Told There Would Be No Math")
 problem.preprocessor = lambda boxes: [
     [int(d) for d in box.split("x")] for box in boxes.strip().split("\n")
 ]

@@ -1,7 +1,7 @@
 from collections import Counter
 
 from lib import *
-problem = aoc.Problem("2021/14: Extended Polymerization")
+problem = old_aoc.Problem("2021/14: Extended Polymerization")
 problem.preprocessor = ppr.llsv
 
 @problem.solver(part=1)

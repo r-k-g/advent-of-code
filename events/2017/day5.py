@@ -1,5 +1,5 @@
 from lib import *
-problem = aoc.Problem("2017/05: A Maze of Twisty Trampolines, All Alike")
+problem = old_aoc.Problem("2017/05: A Maze of Twisty Trampolines, All Alike")
 problem.preprocessor = ppr.lsi
 
 @problem.solver(part=1)

@@ -1,5 +1,5 @@
 from lib import *
-problem = aoc.Problem("2016/03: Squares With Three Sides")
+problem = old_aoc.Problem("2016/03: Squares With Three Sides")
 problem.preprocessor = lambda tris: [
     [int(side) for side in tri.split()] for tri in tris.strip().split("\n")
 ]

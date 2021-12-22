@@ -1,11 +1,7 @@
-import random, os, sys, re, statistics
 from collections import defaultdict
 
-def constant_factory(value):
-    return lambda: value
-
 from lib import *
-problem = aoc.Problem("2015/03: Perfectly Spherical Houses in a Vacuum")
+problem = old_aoc.Problem("2015/03: Perfectly Spherical Houses in a Vacuum")
 problem.preprocessor = ppr.identity
 
 @problem.solver(part=1)

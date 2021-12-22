@@ -2,7 +2,7 @@ from itertools import permutations, product
 import re
 
 from lib import *
-problem = aoc.Problem("2021/19: Beacon Scanner")
+problem = old_aoc.Problem("2021/19: Beacon Scanner")
 problem.preprocessor = ppr.llsg
 
 class Scanner:

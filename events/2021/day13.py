@@ -1,7 +1,7 @@
 from copy import deepcopy
 
 from lib import *
-problem = aoc.Problem("2021/13: Transparent Origami")
+problem = old_aoc.Problem("2021/13: Transparent Origami")
 problem.preprocessor = lambda inp: inp.strip().split("\n\n")
 
 @problem.solver()

@@ -1,5 +1,5 @@
 from lib import *
-problem = aoc.Problem("2021/04: Giant Squid")
+problem = old_aoc.Problem("2021/04: Giant Squid")
 problem.preprocessor = ppr.llsv
 
 

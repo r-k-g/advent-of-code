@@ -2,7 +2,7 @@ from itertools import count, cycle, islice, product
 from functools import lru_cache
 
 from lib import *
-problem = aoc.Problem("2021/21: Dirac Dice")
+problem = old_aoc.Problem("2021/21: Dirac Dice")
 problem.preprocessor = ppr.lsv
 
 @problem.solver()

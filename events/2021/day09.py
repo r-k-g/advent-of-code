@@ -1,5 +1,5 @@
 from lib import *
-problem = aoc.Problem("2021/09: Smoke Basin")
+problem = old_aoc.Problem("2021/09: Smoke Basin")
 problem.preprocessor = lambda s: [
     [int(i) for i in l] for l in s.strip().split("\n")
 ]

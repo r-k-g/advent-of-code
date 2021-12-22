@@ -1,5 +1,5 @@
 from lib import *
-problem = aoc.Problem("2018/05: Alchemical Reduction")
+problem = old_aoc.Problem("2018/05: Alchemical Reduction")
 problem.preprocessor = lambda e: e.strip()
 
 @problem.solver()
