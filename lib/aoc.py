@@ -35,10 +35,11 @@ class Helper:
         m = re.search("(\d{2}|\d{4})\s*[/:]\s*(\d{1,2})", date)
         self.year, self.day = [int(g) for g in m.groups()]
         self.name = name
-
-        print(f"--- Day {self.day}: {self.name} ---")
-
+        
         self.handle_args()
+        
+        if not self.args.testing:
+            print(f"--- Day {self.day}: {self.name} ---")
 
     def handle_args(self):
         parser = argparse.ArgumentParser(description="Solve some AOC!")
@@ -47,7 +48,7 @@ class Helper:
         self.args = parser.parse_args()
 
     def check_sample(self, sample, *answers):
-        if self.args.testing: # Already testing!
+        if self.args.testing or not sample.strip(): # Already testing!
             return
         
         result = subprocess.run(
@@ -60,6 +61,7 @@ class Helper:
             print(result.stderr.decode())
 
         output = result.stdout.decode().replace("\r", "")
+        print(output)
         answers = [str(i) for i in answers]
 
         p1 = re.search("Part ?1[: ] ?(.*?)\n", output, flags=re.IGNORECASE)
@@ -182,7 +184,7 @@ class Helper:
             print(PREFIX_INFO, 
                 f"{delta.seconds} seconds remaining, sleeping..."
             )
-            time.sleep(delta.seconds)
+            time.sleep(delta.seconds + 2)
             return True
         else:
             return delta
@@ -194,7 +196,7 @@ def str_timedelta(delta):
     hours, remainder = divmod(delta.seconds, 3600)
     hours = f"{hours} hour{'s' * (hours > 1)}," * (hours > 0)
     minutes, remainder = divmod(remainder, 60)
-    minutes = f"{minutes} minute{'s' * (minutes > 1)}," * (minutes > 0)
+    minutes = f"{minutes} minute{'s' * (minutes > 1)}" * (minutes > 0)
     seconds = f"{remainder} second{'s' * (remainder > 1)}" * (remainder > 0)
 
     full = [unit for unit in [days, hours, minutes, seconds] if unit]
