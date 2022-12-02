@@ -150,7 +150,6 @@ class Helper:
                 print(PREFIX_ERROR + "Session token not found.")
                 sys.exit(1)
         
-
         r = requests.get(
             f"https://adventofcode.com/{self.year}/day/{self.day}/input",
             headers={
