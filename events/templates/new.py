@@ -7,6 +7,7 @@ SAMPLE = """
 helper.check_sample(SAMPLE, 0, 0)
 
 inp = helper.get_input().strip()
+# inp = inp.split("\n")
 
 print(inp[:100])
 
