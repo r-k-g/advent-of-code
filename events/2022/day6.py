@@ -9,8 +9,7 @@ helper.check_sample(SAMPLE, 7, 19)
 def find_marker(data, unique):
     for c, group in enumerate(nwise(data, unique), start=unique):
         if len(set(group)) == unique:
-            break
-    return c
+            return c
 
 inp = helper.get_input().strip()
 
