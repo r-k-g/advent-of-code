@@ -40,8 +40,8 @@ class Computer:
             pwd = pwd[folder]
         return pwd
 
-    def add_file(self, path, name, file):
-        self.get_current(path)[name] = file
+    def add_folder(self, path, name, contents):
+        self.get_current(path)[name] = contents
 
     def add_size(self, path, size):
         for i in range(1, len(path) + 1):
@@ -59,9 +59,9 @@ for line in inp:
             path.append(line[2])
     elif line[1] != "ls":
         if line[0]  == "dir":
-            computer.add_file(path, line[1], {"SIZE": 0})
+            computer.add_folder(path, line[1], {"SIZE": 0})
         else:
-            computer.add_file(path, line[1], int(line[0]))
+            # computer.add_folder(path, line[1], int(line[0]))
             computer.add_size(path, int(line[0]))
 
 total = 0
