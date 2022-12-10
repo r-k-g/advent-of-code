@@ -76,18 +76,18 @@ class Helper:
                     f"Sample output {ans!r} does not match expected {answers[0]!r}."
                 )
 
-
-        p2 = re.search("Part ?2[: ] ?(.*?)\n", output, flags=re.IGNORECASE)
-        if p2:
-            ans = p2.groups()[0]
-            if ans == str(answers[1]):
-                print(ANSI_GREEN_BG, "PASSED", ANSI_RESET, 
-                    f"Correct sample output ({ans!r} == {answers[1]!r})!"
-                )
-            else:
-                print(ANSI_RED_BG, "FAILED", ANSI_RESET, 
-                    f"Sample output {ans!r} does not match expected {answers[1]!r}."
-                )
+        if len(answers) > 1:
+            p2 = re.search("Part ?2[: ] ?(.*?)\n", output, flags=re.IGNORECASE)
+            if p2:
+                ans = p2.groups()[0]
+                if ans == str(answers[1]):
+                    print(ANSI_GREEN_BG, "PASSED", ANSI_RESET, 
+                        f"Correct sample output ({ans!r} == {answers[1]!r})!"
+                    )
+                else:
+                    print(ANSI_RED_BG, "FAILED", ANSI_RESET, 
+                        f"Sample output {ans!r} does not match expected {answers[1]!r}."
+                    )
         
         print()
 
