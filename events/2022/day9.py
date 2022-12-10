@@ -19,6 +19,9 @@ inp = helper.get_input().strip().split("\n")
 def touching(head, tail):
     return abs(head[0] - tail[0]) < 2 and abs(head[1] - tail[1]) < 2
 
+def sign(n):
+    return (n > 0) - (n < 0)
+
 movemap = {
     "U": (0, 1),
     "D": (0, -1),
@@ -44,11 +47,8 @@ for move in inp:
             tail = knots[n]
             
             while not touching(follow, tail):
-                dx = follow[0] - tail[0]
-                tail[0] += math.copysign(1, dx) * (abs(dx) > 0)
-                
-                dy = follow[1] - tail[1]
-                tail[1] += math.copysign(1, dy) * (abs(dy) > 0)
+                tail[0] += sign(follow[0] - tail[0])
+                tail[1] += sign(follow[1] - tail[1])
                 
                 positions_1.add(tuple(knots[1]))
                 positions_9.add(tuple(knots[-1]))
